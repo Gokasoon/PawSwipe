@@ -48,7 +48,6 @@ function SwipePage() {
 
   return (
     <div className="app">
-      <h1 className="title">🐾 PawSwipe</h1>
       {pets.length > 0 && (
         <div className="card-container">
           {pets.map((pet) => (

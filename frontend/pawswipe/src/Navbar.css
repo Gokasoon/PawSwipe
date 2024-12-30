@@ -1,0 +1,44 @@
+/* Navbar Styling */
+.navbar {
+  position: sticky;
+  top: 0;  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #4ECDC4; 
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.paw-icon {
+  font-size: 2rem;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 15px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: #FF6B6B; /* Hover effect on links */
+}
+
+

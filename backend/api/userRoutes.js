@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express'); 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
@@ -15,6 +15,20 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD || 'toto',
     port: process.env.DB_PORT || 5432,
   });
+
+// Middleware to authenticate JWT
+const authenticateJWT = (req, res, next) => {
+  const token = req.header('Authorization')?.split(' ')[1]; // Get token from Authorization header
+  if (!token) return res.status(401).json({ error: 'Unauthorized' });
+
+  try {
+    const user = jwt.verify(token, SECRET_KEY); // Verify the token
+    req.user = user; // Attach the user data to the request object
+    next(); // Proceed to the next middleware or route handler
+  } catch (err) {
+    res.status(403).json({ error: 'Invalid or expired token' });
+  }
+};
 
 // User registration
 router.post('/users/register', 
@@ -82,7 +96,7 @@ router.post('/users/login', async (req, res) => {
 });
 
 // Get user profile (authenticated)
-router.get('/users/me', async (req, res) => {
+router.get('/users/me', authenticateJWT, async (req, res) => {
   try {
     const result = await pool.query('SELECT id, username, email FROM users WHERE id = $1', [req.user.id]);
     res.json(result.rows[0]);
@@ -90,9 +104,9 @@ router.get('/users/me', async (req, res) => {
     console.error(err);
     res.status(500).json({ error: 'Internal server error' });
   }
-});
+}); 
 
-// Get all users (Admin only) TO SECURE !!!!
+// Get all users (Admin only) TO SECURE !!!! (example route)
 router.get('/users', async (req, res) => {
     try {
       const result = await pool.query('SELECT id, username, email FROM users');

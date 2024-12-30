@@ -5,19 +5,14 @@ import UsersPage from './UsersPage';
 import RegisterPage from './RegisterPage';
 import LoginPage from './LoginPage';
 import ProfilePage from './ProfilePage';
+import LogoutPage from './LogoutPage';
+import Navbar from './Navbar';
 
 const App = () => {
   return (
     <Router>
       <div>
-        {/* Navigation Links */}
-        <nav style={{ padding: '10px', background: '#f0f0f0', marginBottom: '20px' }}>
-          <Link to="/" style={{ margin: '0 10px' }}>Home</Link>
-          <Link to="/register" style={{ margin: '0 10px' }}>Register</Link>
-          <Link to="/login" style={{ margin: '0 10px' }}>Login</Link>
-          <Link to="/users" style={{ margin: '0 10px' }}>Users</Link>
-          <Link to="/profile" style={{ margin: '0 10px' }}>Profile</Link>
-        </nav>
+        <Navbar />
 
         {/* Routes */}
         <Routes>
@@ -26,6 +21,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/users" element={<UsersPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/logout" element={<LogoutPage />} />
         </Routes>
       </div>
     </Router>

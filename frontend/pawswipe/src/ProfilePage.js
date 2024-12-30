@@ -2,14 +2,27 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const ProfilePage = () => {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/users/me');
+        const token = localStorage.getItem('token'); // Get the token from localStorage
+        if (!token) {
+          setError('No token found, please log in.');
+          setLoading(false);
+          return;
+        }
+
+        // Send the token in the Authorization header as Bearer
+        const response = await axios.get('http://localhost:5000/api/users/me', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
         setUser(response.data);
         setLoading(false);
       } catch (err) {
@@ -21,18 +34,15 @@ const ProfilePage = () => {
     fetchUser();
   }, []);
 
-  if (loading) return <p>Loading users...</p>;
+  if (loading) return <p>Loading user profile...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
-      <h1>User</h1>
+      <h1>User Profile</h1>
       <ul>
-        {user.map((usr) => (
-          <li key={usr.id}>
-            <strong>{usr.username}</strong> - {usr.email}
-          </li>
-        ))}
+        <li><strong>Username:</strong> {user.username}</li>
+        <li><strong>Email:</strong> {user.email}</li>
       </ul>
     </div>
   );
