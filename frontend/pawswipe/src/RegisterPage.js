@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';  // Importing useNavigate for redirection
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 import './RegisterPage.css';
 
 function RegisterPage() {
@@ -12,6 +13,7 @@ function RegisterPage() {
 
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { login } = useAuth();
 
   // useNavigate hook for programmatic navigation
   const navigate = useNavigate();
@@ -30,17 +32,14 @@ function RegisterPage() {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-
+  
     try {
       const response = await axios.post('http://localhost:5000/api/users/register', formData);
-
-      // If registration is successful, redirect to SwipePage
-      console.log('User registered successfully:', response.data);
-
+  
+      login(response.data.token);
+  
       // Redirect to the SwipePage (home page) after successful registration
-      navigate('/');  // useNavigate to navigate to the swipe page
-
-      setIsLoading(false);
+      navigate('/'); // Redirect to the desired page
     } catch (error) {
       setIsLoading(false);
       if (error.response && error.response.data.errors) {
