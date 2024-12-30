@@ -28,8 +28,8 @@
 
 .card {
   position: relative;
-  width: 320px;
-  height: 480px;
+  width: 400px;
+  height: 550px;
   background: white;
   border-radius: 20px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
