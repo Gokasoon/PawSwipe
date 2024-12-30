@@ -1,74 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import TinderCard from 'react-tinder-card';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import SwipePage from './SwipePage';
+import UsersPage from './UsersPage';
+import RegisterPage from './RegisterPage';
+import LoginPage from './LoginPage';
+import ProfilePage from './ProfilePage';
 
-function App() {
-  const [pets, setPets] = useState([]);
-  const [lastDirection, setLastDirection] = useState('');
-  const [currentPet, setCurrentPet] = useState(null);
-
-  useEffect(() => {
-    fetchRandomPet();
-  }, []);
-
-  const fetchRandomPet = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/api/pets/random');
-      setPets([response.data]);
-      setCurrentPet(response.data);
-    } catch (error) {
-      console.error('Error fetching pet data:', error);
-    }
-  };
-
-  const handleSwipe = (direction) => {
-    setLastDirection(direction);
-    fetchRandomPet();
-  };
-
-  const handleLike = () => {
-    handleSwipe('right');
-  };
-
-  const handleDismiss = () => {
-    handleSwipe('left');
-  };
-
+const App = () => {
   return (
-    <div className="app">
-      <h1 className="title">🐾 PawSwipe</h1>
-      {pets.length > 0 && (
-        <div className="card-container">
-          {pets.map((pet) => (
-            <TinderCard
-              key={pet.animal_id}
-              onSwipe={handleSwipe}
-              preventSwipe={['up', 'down']}
-              className="swipe"
-            >
-              <div className="card">
-                <img src={pet.image_url} alt={pet.name} draggable="false" />
-                <div className="card-content">
-                  <h2 className="pet-name">{pet.name}</h2>
-                  <p className="pet-info">{pet.species} • {pet.breed}</p>
-                </div>
-                <div className="button-container">
-                  <button onClick={handleDismiss} className="button dismiss-button">✕</button>
-                  <button onClick={handleLike} className="button like-button">♥</button>
-                </div>
-              </div>
-            </TinderCard>
-          ))}
-        </div>
-      )}
-      {lastDirection && (
-        <div className="swipe-info">
-          Last swipe: {lastDirection === 'right' ? '❤️' : '✕'}
-        </div>
-      )}
-    </div>
+    <Router>
+      <div>
+        {/* Navigation Links */}
+        <nav style={{ padding: '10px', background: '#f0f0f0', marginBottom: '20px' }}>
+          <Link to="/" style={{ margin: '0 10px' }}>Home</Link>
+          <Link to="/register" style={{ margin: '0 10px' }}>Register</Link>
+          <Link to="/login" style={{ margin: '0 10px' }}>Login</Link>
+          <Link to="/users" style={{ margin: '0 10px' }}>Users</Link>
+          <Link to="/profile" style={{ margin: '0 10px' }}>Profile</Link>
+        </nav>
+
+        {/* Routes */}
+        <Routes>
+          <Route path="/" element={<SwipePage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/users" element={<UsersPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
