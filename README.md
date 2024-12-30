@@ -5,10 +5,13 @@
 - API
     - Pet actions (Match/not match)
     - Accounts
-    - Messages
+    - Chat
     - Specific searches 
 
 - Front-end
+
+- Dockerizing
+
 
 #### FIX
 - Modify scraper to get all images (need to go on the page of every pet)
