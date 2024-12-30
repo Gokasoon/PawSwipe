@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';  // Importing useNavigate for redirection
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 import './LoginPage.css';
 
 function LoginPage() {
@@ -8,14 +9,11 @@ function LoginPage() {
     email: '',
     password: '',
   });
-
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  // useNavigate hook for programmatic navigation
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -24,7 +22,6 @@ function LoginPage() {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -32,24 +29,12 @@ function LoginPage() {
 
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', formData);
-
-      // If login is successful, redirect to SwipePage
-      console.log('User logged in successfully:', response.data);
-
-      // Assuming the server responds with a token, you can save it in localStorage or context
-      localStorage.setItem('token', response.data.token);
-
-      // Redirect to the SwipePage (or dashboard) after successful login
-      navigate('/');  // Redirect to the swipe page
-
-      setIsLoading(false);
+      login(response.data.token);
+      navigate('/');
     } catch (error) {
+      setError(error.response?.data?.error || 'An error occurred while logging in.');
+    } finally {
       setIsLoading(false);
-      if (error.response && error.response.data.error) {
-        setError(error.response.data.error);
-      } else {
-        setError('An error occurred while logging in. Please try again later.');
-      }
     }
   };
 

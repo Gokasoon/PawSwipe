@@ -27,6 +27,7 @@
 - Normalize pet name 'Olive' not OLIVe 
 - Add SPAs adress
 - Add arrow on the car to see the next image of the pet
+- Login after register
 
 
 ## Utilisation
