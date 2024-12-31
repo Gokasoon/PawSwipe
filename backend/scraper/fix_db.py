@@ -45,7 +45,8 @@ def delete_reserved_pets(cursor, conn):
             DELETE FROM pets
             WHERE LOWER(name) LIKE '%réservé%' OR
                   LOWER(name) LIKE '%reserve%' OR
-                  LOWER(name) LIKE '%reservée%'
+                  LOWER(name) LIKE '%reservée%' OR
+                  LOWER(name) LIKE '%reservé%'
         """)
         
         # Commit the transaction

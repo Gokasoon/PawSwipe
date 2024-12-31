@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TinderCard from 'react-tinder-card';
+import { useAuth } from './AuthContext';
 import './SwipePage.css';
 
 function SwipePage() {
   const [pets, setPets] = useState([]);
   const [lastDirection, setLastDirection] = useState('');
   const [currentPet, setCurrentPet] = useState(null);
-  const [likedPets, setLikedPets] = useState([]); 
+  const [likedPets, setLikedPets] = useState([]);
   const [dismissedPets, setDismissedPets] = useState([]);
+
+  const { isLoggedIn } = useAuth(); // Access isLoggedIn state
+  const token = localStorage.getItem('token'); // Get token from localStorage
 
   useEffect(() => {
     fetchRandomPet();
@@ -24,6 +28,26 @@ function SwipePage() {
     }
   };
 
+  const likePet = async (petId) => {
+    if (!isLoggedIn || !token) {
+      console.error('User is not logged in. Cannot like a pet.');
+      return;
+    }
+
+    try {
+      await axios.post(
+        `http://localhost:5000/api/users/likes`,
+        { petId },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log(`Pet ${petId} liked successfully.`);
+    } catch (error) {
+      console.error('Error liking pet:', error.response?.data?.error || error.message);
+    }
+  };
+
   const handleSwipe = (direction) => {
     if (!currentPet) return;
 
@@ -31,11 +55,12 @@ function SwipePage() {
 
     if (direction === 'right') {
       setLikedPets((prevLiked) => [...prevLiked, currentPet]);
+      likePet(currentPet.animal_id); // Save liked pet to backend
     } else if (direction === 'left') {
       setDismissedPets((prevDismissed) => [...prevDismissed, currentPet]);
     }
 
-    fetchRandomPet(); 
+    fetchRandomPet();
   };
 
   const handleLike = () => {

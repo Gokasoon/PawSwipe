@@ -129,4 +129,38 @@ router.get('/users', async (req, res) => {
     }
   });
 
+// Add a like to a pet
+router.post('/users/likes', authenticateJWT, async (req, res) => {
+  const userId = req.user.id;
+  const { petId } = req.body;
+
+  try {
+    await pool.query(
+      'INSERT INTO likes (user_id, pet_id, liked_at) VALUES ($1, $2, NOW())',
+      [userId, petId]
+    );
+    res.status(201).json({ message: 'Pet liked successfully.' });
+  } catch (error) {
+    console.error('Error saving liked pet:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+// Get liked pets for a user
+router.get('/users/likes', authenticateJWT, async (req, res) => {
+  const userId = req.user.id;
+  try {
+    const result = await pool.query(
+      'SELECT pets.* FROM likes JOIN pets ON likes.pet_id = pets.animal_id WHERE likes.user_id = $1',
+      [userId]
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router;

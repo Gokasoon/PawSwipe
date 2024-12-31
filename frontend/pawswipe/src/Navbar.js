@@ -27,6 +27,7 @@ const Navbar = () => {
 
         {isLoggedIn && (
           <>
+            <Link to="/liked-pets" style={{ margin: '0 10px' }}>Likes</Link>
             <Link to="/users" style={{ margin: '0 10px' }}>Users</Link>
             <Link to="/profile" style={{ margin: '0 10px' }}>Profile</Link>
             <Link to="/" onClick={handleLogout} style={{ margin: '0 10px' }}>Logout</Link>

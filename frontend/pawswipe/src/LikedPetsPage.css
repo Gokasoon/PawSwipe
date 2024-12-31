@@ -1,0 +1,46 @@
+.liked-pets-page {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .liked-pets-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .liked-pet-card {
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .liked-pet-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .liked-pet-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .liked-pet-details {
+    padding: 10px;
+    background-color: #fff;
+  }
+  
+  .liked-pet-name {
+    font-size: 1.2em;
+    margin: 0;
+  }
+  
+  .liked-pet-info {
+    color: #555;
+    font-size: 0.9em;
+  }
+  
