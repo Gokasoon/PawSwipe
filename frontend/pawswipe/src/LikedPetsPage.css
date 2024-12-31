@@ -1,6 +1,12 @@
-.liked-pets-page {
+ 
+  .liked-pets-page {
     text-align: center;
     padding: 20px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    color: white;
   }
   
   .liked-pets-container {
@@ -11,6 +17,7 @@
   }
   
   .liked-pet-card {
+    background-color: #fff;
     width: 200px;
     border: 1px solid #ddd;
     border-radius: 10px;
