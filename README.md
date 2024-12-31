@@ -2,13 +2,19 @@
 
 ## TODO
 
+- Backend 
+    - View info pet (Likes page)
+    - Remove pet liked (Likes page)
+    - Edit info pet (Pets page)
+    - Remove pet (Pets page)
+
 
 - Roles :
     - Client
         - Likes X
         - Chat
     - Staff
-        - + Manage pets posts (of its shelter only ?) - CRUD
+        - + Manage pets posts (of its shelter only ?) - CRUD 
     - Admin
         - + Manage accounts - CRUD
         - + Manage all posts - CRUD
