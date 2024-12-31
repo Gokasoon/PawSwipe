@@ -26,6 +26,7 @@
 - Add SPA entity ?
 - Add arrow on the card to see the next image of the pet
 - Fix lag all pets page
+- Fix docker
 
 ## Utilisation
 - Start pgAdmin4

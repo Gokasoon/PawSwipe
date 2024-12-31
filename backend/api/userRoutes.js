@@ -2,19 +2,18 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
-const { Pool } = require('pg');
 const router = express.Router();
 
 const SECRET_KEY = process.env.JWT_SECRET || 'your_secret_key';
 
-// PostgreSQL connection pool
+require('dotenv').config();
+// console.log('Database URL:', process.env.DATABASE_URL);
+
+const { Pool } = require('pg');
 const pool = new Pool({
-    user: process.env.DB_USER || 'postgres',
-    host: process.env.DB_HOST || 'localhost',
-    database: process.env.DB_NAME || 'PawSwipe',
-    password: process.env.DB_PASSWORD || 'toto',
-    port: process.env.DB_PORT || 5432,
-  });
+  connectionString: process.env.DATABASE_URL,  // Use DOCKER_DATABASE_URL for Docker
+});
+
 
 // Middleware to authenticate JWT
 const authenticateJWT = (req, res, next) => {

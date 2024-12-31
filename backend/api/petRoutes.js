@@ -1,15 +1,13 @@
 const express = require('express');
-const { Pool } = require('pg');
 const router = express.Router();
 
-// PostgreSQL connection pool
+require('dotenv').config();
+
+const { Pool } = require('pg');
 const pool = new Pool({
-  user: process.env.DB_USER || 'postgres',
-  host: process.env.DB_HOST || 'localhost',
-  database: process.env.DB_NAME || 'PawSwipe',
-  password: process.env.DB_PASSWORD || 'toto',
-  port: process.env.DB_PORT || 5432,
+  connectionString: process.env.DATABASE_URL, // Use DOCKER_DATABASE_URL for Docker
 });
+
 
 // GET all pets
 router.get('/pets', async (req, res) => {
