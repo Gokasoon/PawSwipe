@@ -29,7 +29,8 @@ function LoginPage() {
 
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', formData);
-      login(response.data.token);
+      const { token, role } = response.data;
+      login(token, role);
       navigate('/');
     } catch (error) {
       setError(error.response?.data?.error || 'An error occurred while logging in.');

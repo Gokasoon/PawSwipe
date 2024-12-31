@@ -36,10 +36,10 @@ function RegisterPage() {
     try {
       const response = await axios.post('http://localhost:5000/api/users/register', formData);
   
-      login(response.data.token);
+      const { token, role } = response.data;
+      login(token, role);
   
-      // Redirect to the SwipePage (home page) after successful registration
-      navigate('/'); // Redirect to the desired page
+      navigate('/'); 
     } catch (error) {
       setIsLoading(false);
       if (error.response && error.response.data.errors) {

@@ -7,6 +7,7 @@ import RegisterPage from './RegisterPage';
 import LoginPage from './LoginPage';
 import ProfilePage from './ProfilePage';
 import LikedPetsPage from './LikedPetsPage';
+import AllPetsPage from './AllPetsPage';
 import Navbar from './Navbar';
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/users" element={<UsersPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/liked-pets" element={<LikedPetsPage />} />
+            <Route path="/all-pets" element={<AllPetsPage />} />
           </Routes>
         </div>
       </Router>

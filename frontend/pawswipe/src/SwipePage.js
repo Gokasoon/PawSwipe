@@ -11,8 +11,8 @@ function SwipePage() {
   const [likedPets, setLikedPets] = useState([]);
   const [dismissedPets, setDismissedPets] = useState([]);
 
-  const { isLoggedIn } = useAuth(); // Access isLoggedIn state
-  const token = localStorage.getItem('token'); // Get token from localStorage
+  const { isLoggedIn } = useAuth(); 
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     fetchRandomPet();
@@ -87,6 +87,7 @@ function SwipePage() {
                 <div className="card-content">
                   <h2 className="pet-name">{pet.name}</h2>
                   <p className="pet-info">{pet.species} • {pet.breed}</p>
+                  <p className="pet-info">{pet.shelter}</p>
                 </div>
                 <div className="button-container">
                   <button onClick={handleDismiss} className="button dismiss-button">✕</button>
