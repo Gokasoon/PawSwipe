@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FixedSizeGrid as Grid } from 'react-window';
 import { useAuth } from './AuthContext';
 import axios from 'axios';
-import './LikedPetsPage.css';
+import './AllPetsPage.css';
 
 function AllPetsPage() {
   const [pets, setPets] = useState([]);
