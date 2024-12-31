@@ -94,8 +94,14 @@ router.post('/users/login', async (req, res) => {
       return res.status(400).json({ error: 'Invalid password' });
     }
 
-    const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, { expiresIn: '1h' });
-    res.json({ token });
+    // Include the role in the JWT payload
+    const token = jwt.sign(
+      { id: user.id, username: user.username, role: user.role },
+      SECRET_KEY,
+      { expiresIn: '1h' }
+    );
+
+    res.json({ token, role: user.role }); // Return the role in the response
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error' });

@@ -35,6 +35,16 @@ def remove_word_with_numbers(pet_name):
         return cleaned_name
     return pet_name
 
+def normalize_pet_name(pet_name):
+    """
+    Normalizes the pet name by capitalizing the first letter of each word and
+    converting the rest to lowercase.
+    """
+    if pet_name:
+        return ' '.join(word.capitalize() for word in pet_name.split())
+    return pet_name
+
+
 def delete_reserved_pets(cursor, conn):
     """
     Deletes pets from the database whose names contain variations of 'réservé'.
@@ -68,6 +78,7 @@ def update_pet_names(cursor, conn):
         for pet in pets:
             animal_id, pet_name = pet
             cleaned_name = remove_word_with_numbers(pet_name)
+            cleaned_name = normalize_pet_name(cleaned_name)
 
             # Update the pet name in the database
             cursor.execute("""
