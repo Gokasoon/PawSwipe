@@ -5,10 +5,10 @@
 
 - Roles :
     - Client
-        - Likes 
+        - Likes X
         - Chat
     - Staff
-        - + Manage pets posts of its shelter - CRUD
+        - + Manage pets posts (of its shelter only ?) - CRUD
     - Admin
         - + Manage accounts - CRUD
         - + Manage all posts - CRUD
@@ -25,8 +25,8 @@
 - Modify scraper to get all images (need to go on the page of every pet)
 - Add SPA entity ?
 - Add arrow on the card to see the next image of the pet
-- Fix lag all pets page
 - Fix docker
+- Fix styles (scrollbar AllPets)
 
 ## Utilisation
 - Start pgAdmin4
