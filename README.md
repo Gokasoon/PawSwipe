@@ -2,34 +2,32 @@
 
 ## TODO
 
-- API
-    - Pet Like
-    - Accounts
-        - Client
-            - Likes 
-            - Chat
-        - Staff
-            - Manage pets posts
-        - Admin
-            - Manage accounts
-            - Manage post
-    - Chat
-    - Specific searches 
 
+- Roles :
+    - Client
+        - Likes 
+        - Chat
+    - Staff
+        - + Manage pets posts of its shelter - CRUD
+    - Admin
+        - + Manage accounts - CRUD
+        - + Manage all posts - CRUD
 
-- Front-end
+- Chat
+- Specific searches 
+
+- SECURE
 
 - Dockerizing
 
 
 #### FIX
 - Modify scraper to get all images (need to go on the page of every pet)
-- Normalize pet name 'Olive' not OLIVe 
-- Add SPAs adress ?
+- Add SPA entity ?
 - Add arrow on the card to see the next image of the pet
-
+- Fix lag all pets page
 
 ## Utilisation
 - Start pgAdmin4
-- Go to backend/api and `node app.js`
+- Go to backend/api and `npm run devStart`
 - Go to frontend/pawswipe and `npm start`
